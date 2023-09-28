@@ -1,0 +1,99 @@
+﻿@page
+@model IndexModel
+@inject IHttpContextAccessor contxt;
+@{
+    ViewData["Title"] = "E-ticaret Teması 1";
+    ViewData["Description"] = "Lorem Lorem Lorem Lorem Lorem Lorem";
+}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body class="mb-5">
+    <!-- Banner -->
+    <div class="banner">
+        <img src="" alt="100 TL üstü Kargo Bedava" height="50" width="1300">
+    </div>
+    <!-- navbar -->
+    <!-- images -->
+    <div class="container text-center mt-5">
+        <div class="row">
+            <div class="col">
+                <img src="./image/ad250x75.png" alt="250x75" width="250" height="75">
+            </div>
+            <div class="col">
+                <img src="./image/ad250x75.png" alt="250x75" width="250" height="75">
+            </div>
+            <div class="col">
+                <img src="./image/ad250x75.png" alt="250x75" width="250" height="75">
+            </div>
+        </div>
+    </div>
+    <!-- products -->
+    <div class="container mt-5">
+
+        <div class="row">
+            <div class="col-2">
+            </div>
+            <div class="col-8 text-center">
+                <h3>Ürünlerimiz</h3>
+            </div>
+            <div class="col-2">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 col-sm-1 col-xl-8">
+            </div>
+            <div class="col-md-4 col-sm-10 col-xl-2">
+                Sıralama
+            </div>
+            <div class="col-md-4 col-sm-10 col-xl-2">
+                Filtreleme
+            </div>
+        </div>
+
+        <div class="row mt-4">
+
+            @foreach (var product in Model.products)
+            {
+                <div class="col-lg-3 col-md-5 mb-3 mt-5">
+                    <div class="product-box">
+                        <div class="product-inner-box position-relative">
+                            <div class="icons position-absolute">
+                                <a href="" class="text-decoration-none text-dark"><ion-icon name="heart-sharp"></ion-icon></a>
+                                <a href="" class="text-decoration-none text-dark"><ion-icon name="share-social-sharp"></ion-icon></a>
+                            </div>
+                            <div class="onsale">
+                                <span class="badge rounded-0"><ion-icon name="arrow-down-sharp"></ion-icon>%90</span>
+                            </div>
+                            <img src="image/@product.ProductUrl " alt="@product.ProductTitle" class="img-fluid mt-3">
+                            <div class="cart-btn">
+                                <a class="btn bg-white shadow-sm rounded-pill" href="addCart?urun_id=@product.ProductId&urun_fiyat=@product.ProductPrice&user_id=@contxt.HttpContext.Session.GetInt32("UserId")">
+                                    <ion-icon name="cart-sharp"></ion-icon> Sepete Ekle
+                                </a>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">
+                                <h3>@product.ProductTitle</h3>
+                            </div>
+                            <div class="product-price">
+                                <span>@product.ProductPrice.ToString("C")</span> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+
+
+        </div>
+    </div>
+
+
+
+    <script src="js/site.js"></script>
+</body>

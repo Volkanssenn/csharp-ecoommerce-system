@@ -1,0 +1,76 @@
+﻿@inject IHttpContextAccessor contxt;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] | Marka Adı</title>
+    <meta name="description" content="@ViewData["Description"]">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/tema1.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid" style="margin: 0 150px;">
+            <a class="navbar-brand" href="#">
+                <img src="image/logo4.png" alt="." width="200" height="75" class="d-inline-block align-text-top">
+            </a>
+            <form class="d-flex" role="search">
+                <div class="search form-control d-flex">
+                    <div class=" d-flex justify-content-center align-items-center"><ion-icon name="search-sharp"></ion-icon></div>
+                    <input class="searchInput" type="search" placeholder="Ne arıyorsun?" aria-label="Search">
+                </div>
+                <button class="btn btn-outline-success btnAra" type="submit">Ara</button>
+
+            </form>
+            <div class="profile" style="display: flex;">
+                <a href="Sepet?user_id=@contxt.HttpContext.Session.GetInt32("UserId")">sepet</a>
+                <button type="button" class="btn btn-transparent position-relative" onclick="sepet()" >
+                    <ion-icon name="cart-sharp" style="font-size: 22px;"></ion-icon>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        @if(Model.ItemCount > 9)
+                        {
+                            @("9+")
+                        }
+                        else
+                        {
+                            @Model.ItemCount
+                        }
+
+                        <span class="visually-hidden">Sepet</span>
+                    </span>
+                </button>
+                <div class="dropdown">
+                    <button type="button" class="btn btn-transparent position-relative dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <ion-icon name="person-sharp" style="font-size: 22px;"></ion-icon>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Hesap @contxt.HttpContext.Session.GetString("UserName")</a></li>
+                        <li><a class="dropdown-item" href="#">Siparişlerim</a></li>
+                        <li><a class="dropdown-item" href="#">İadeler ve İptaller</a></li>
+                        <li><a class="dropdown-item" href="#">Çıkış</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - This theme is developed by <a href="https://www.instagram.com/volkanssenn/" style="color:green;">FounderV</a>  for <a href="https://www.ovox.com.tr" style="color:green;">OVOX</a>
+        </div>
+    </footer>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

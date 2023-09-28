@@ -1,0 +1,58 @@
+﻿@page
+@model Tema1v3.Pages.SepetModel
+@{
+    ViewData["Title"] = "Sepet Sayfası";
+    ViewData["Description"] = "Tema1 Sepet Sayfası";
+}
+<style>
+    .cart-item {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .cart-item-title {
+        font-weight: bold;
+    }
+
+    .cart-item-price {
+        font-size: 1.25rem;
+    }
+</style>
+    <div class="container mt-5">
+
+            @foreach (var urun in Model.userCarts)
+            {
+                    <div class="row">
+                        <div class="col-md-8 offset-md-2">
+                            <div class="cart-item">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <img src="image/ornekUrun.jpg" alt="Ürün Resmi" class="img-fluid">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="cart-item-title">@urun.product_id</div>
+
+                                        <div class="cart-item-description">@urun.Id</div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="number" class="form-control" value="1">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <button class="btn btn-danger">Sil</button>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="cart-item-price">99.99 TL</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            }
+
+                <!-- Diğer ürünler için aynı yapıyı kopyalayabilirsiniz -->
+
+                <div class="text-center mt-3">
+                    <button class="btn btn-primary">Sepeti Onayla</button>
+                </div>
+    </div>
